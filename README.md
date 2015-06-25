@@ -43,5 +43,13 @@ Run unit test
 View api for calling
 
     app/console route:debug | grep api
+    
+Run server with app console
+    
+    app/console server:run &
+    
+After run server, you also can access to api doc by link:
+
+    http://localhost:8000/api/doc
 
 [1]:  http://getcomposer.org/
