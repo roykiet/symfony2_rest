@@ -300,20 +300,73 @@ class PostController extends FOSRestController
             return ['message' => 'cannot delete'];
         }
     }
-    /*
-    * @Annotations\View(
-    *  template = "AcmeBlogBundle:Post:getPosts.html.twig",
-    *  statusCode = Codes::HTTP_BAD_REQUEST,
-    *  templateVar = "form"
-    * )
-    *
-    * @param Request $request the request object
-    * @param Tag $tag the request object
-    *
-    * @return FormTypeInterface|View
-    */
-    public function getTagPostsAction($tagId)
+
+    /**
+     * Get post by tags.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   statusCodes = {
+     *     200 = "Returned when successful"
+     *   }
+     * )
+     *
+     * @Annotations\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing posts.")
+     * @Annotations\QueryParam(name="limit", requirements="\d+", default="5", description="How many posts to return.")
+     *
+     * @Annotations\View(
+     *  template = "AcmeBlogBundle:Post:getPosts.html.twig",
+     *  statusCode = Codes::HTTP_BAD_REQUEST,
+     *  templateVar="posts"
+     * )
+     *
+     * @param Request               $request      the request object
+     * @param ParamFetcherInterface $paramFetcher param fetcher service
+     *
+     * @return array
+     */
+    public function postPostTagAction(Request $request, ParamFetcherInterface $paramFetcher)
     {
-        
+        $offset = $paramFetcher->get('offset');
+        $offset = null == $offset ? 0 : $offset;
+        $limit = $paramFetcher->get('limit');
+        $tagIds = $request->request->get('tags');
+        $posts = $this->getDoctrine()
+            ->getRepository('AcmeBlogBundle:Post')
+            ->findPostsByTagIds($tagIds, $offset, $limit);
+
+        return $posts;
+    }
+
+    /**
+     * Get number of posts by tags.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   statusCodes = {
+     *     200 = "Returned when successful"
+     *   }
+     * )
+     *
+     *
+     * @Annotations\View(
+     *  template = "AcmeBlogBundle:Post:countPosts.html.twig",
+     *  statusCode = Codes::HTTP_BAD_REQUEST,
+     *  templateVar="count"
+     * )
+     *
+     * @param Request               $request      the request object
+     * @param ParamFetcherInterface $paramFetcher param fetcher service
+     *
+     * @return array
+     */
+    public function postPostCounttagAction(Request $request)
+    {
+        $tagIds = $request->request->get('tags');
+        $count = $this->getDoctrine()
+            ->getRepository('AcmeBlogBundle:Post')
+            ->countPostsByTagIds($tagIds);
+
+        return $count;
     }
 }

@@ -10,7 +10,8 @@ use \Doctrine\Common\Collections\ArrayCollection;
  * Post
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Acme\BlogBundle\Entity\PostRepository")
+ *
  */
 class Post implements PostInterface
 {
