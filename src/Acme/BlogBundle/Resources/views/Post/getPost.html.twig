@@ -1,0 +1,8 @@
+<h1>{{ post.id }}- {{ post.title }}</h1>
+    <p>
+{{ post.body }}
+    </p>
+<p> Tags: </p>
+{% for tag in post.tags %}
+    {{ tag.name }}<br/>
+{% endfor %}

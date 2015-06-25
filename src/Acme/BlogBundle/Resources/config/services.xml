@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="acme_blog.post.handler.class">Acme\BlogBundle\Handler\PostHandler</parameter>
+        <parameter key="acme_blog.post.class">Acme\BlogBundle\Entity\Post</parameter>
+        <parameter key="acme_blog.tag.handler.class">Acme\BlogBundle\Handler\TagHandler</parameter>
+        <parameter key="acme_blog.tag.class">Acme\BlogBundle\Entity\Tag</parameter>
+        <parameter key="acme_blog.mail.handler.class">Acme\BlogBundle\Handler\MailHandler</parameter>
+        <parameter key="acme_blog.log.handler.class">Acme\BlogBundle\Handler\LogHandler</parameter>
+    </parameters>
+
+    <services>
+        <service id="acme_blog.post.handler" class="%acme_blog.post.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%acme_blog.post.class%</argument>
+            <argument type="service" id="form.factory"></argument>
+        </service>
+        <service id="acme_blog.tag.handler" class="%acme_blog.tag.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%acme_blog.tag.class%</argument>
+            <argument type="service" id="form.factory"></argument>
+        </service>
+        <service id="acme_blog.mail.handler" class="%acme_blog.mail.handler.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="acme_blog.logger.handler" class="%acme_blog.log.handler.class%">
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+
+</container>

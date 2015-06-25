@@ -1,0 +1,16 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  gmail
+    mailer_host:       ~
+    mailer_user:       omsqaautomation@gmail.com
+    mailer_password:   oms12345678
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    log_path:           /var/log
