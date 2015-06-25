@@ -90,7 +90,7 @@ class TagControllerTest extends WebTestCase
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),
-            '{"titles":"title1","bodys":"body1"}'
+            '{"name":"name1"}'
         );
 
         $this->assertJsonResponse($this->client->getResponse(), 400, false);
