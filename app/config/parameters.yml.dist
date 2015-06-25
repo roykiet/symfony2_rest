@@ -6,11 +6,11 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  gmail
+    mailer_transport:  smtp
     mailer_host:       ~
-    mailer_user:       omsqaautomation@gmail.com
-    mailer_password:   oms12345678
+    mailer_user:       ~
+    mailer_password:   ~
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
-    log_path:           /var/log
+    log_path:          %kernel.root_dir%/logs/symfony2_rest.log
